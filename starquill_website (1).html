@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starquill Creations</title>
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.ibb.co/7ryFg8G/starquill-favicon.png" type="image/png">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Montserrat', sans-serif; line-height:1.6; color:#222; scroll-behavior:smooth; transition: background 0.3s, color 0.3s; }
+    body.dark { background:#121212; color:#eee; }
+
+    /* Brand Colors */
+    :root {
+      --primary: #6a11cb;
+      --secondary: #2575fc;
+      --accent: #f0b429;
+      --btn-bg: linear-gradient(45deg, #6a11cb, #2575fc);
+      --btn-hover: linear-gradient(45deg, #2575fc, #6a11cb);
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top:0;
+      z-index:100;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:15px 50px;
+      background:#222;
+      color:#fff;
+      transition: background 0.3s;
+    }
+    nav.scrolled { background: rgba(34,34,34,0.95); }
+    nav ul { list-style:none; display:flex; gap:20px; }
+    nav ul li a { color:#fff; text-decoration:none; font-weight:600; transition: color 0.3s; }
+    nav ul li a:hover { color: var(--accent); }
+    .logo { font-weight:bold; font-size:1.7rem; letter-spacing:1px; }
+    .mode-toggle {
+      cursor:pointer;
+      padding:5px 12px;
+      border:1px solid #fff;
+      border-radius:5px;
+      font-size:0.9rem;
+      transition: background 0.3s, color 0.3s;
+    }
+    .mode-toggle:hover { background:#fff; color:#222; }
+
+    /* Hero */
+    #home {
+      height:100vh;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      flex-direction:column;
+      padding:0 20px;
+      opacity:0;
+      transform: translateY(30px);
+      animation: fadeIn 1s forwards 0.3s;
+    }
+    #home h1 { font-size:3rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.4); }
+    #home .typing { font-size:1.5rem; margin-top:15px; color:#fff; text-shadow: 1px 1px 8px rgba(0,0,0,0.3); border-right: 2px solid #fff; white-space: nowrap; overflow:hidden; }
+    #home .btn {
+      display:inline-block;
+      margin-top:25px;
+      padding:12px 30px;
+      background: var(--btn-bg);
+      color:#fff;
+      border-radius:30px;
+      text-decoration:none;
+      font-weight:700;
+      font-size:1.1rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: all 0.3s;
+    }
+    #home .btn:hover { background: var(--btn-hover); transform: scale(1.05); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+
+    /* Sections */
+    section { padding:80px 50px; opacity:0; transform: translateY(30px); }
+    section.visible { opacity:1; transform: translateY(0); transition: all 1s ease; }
+    h2 { text-align:center; margin-bottom:50px; font-size:2.5rem; color: var(--primary); }
+
+    /* Portfolio */
+    .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
+    .portfolio-item {
+      overflow:hidden;
+      border-radius:15px;
+      cursor:pointer;
+      transition: transform 0.4s, box-shadow 0.4s;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    .portfolio-item:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
+    .portfolio-item img { width:100%; display:block; }
+
+    /* Contact Form */
+    form { max-width:600px; margin:0 auto; display:flex; flex-direction:column; gap:15px; }
+    input, textarea { padding:12px; border-radius:8px; border:1px solid #ccc; background:white; color:black; font-size:1rem; }
+    body.dark input, body.dark textarea { background:#222; color:#eee; border:1px solid #555; }
+    button {
+      padding:14px;
+      border:none;
+      border-radius:30px;
+      background: var(--btn-bg);
+      color:#fff;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition: all 0.3s;
+    }
+    button:hover { background: var(--btn-hover); transform: scale(1.05); }
+
+    /* Social Icons */
+    .social { text-align:center; margin-top:30px; }
+    .social a {
+      display:inline-block;
+      margin:0 12px;
+      color: var(--secondary);
+      font-size:1.8rem;
+      transition: transform 0.3s, color 0.3s;
+      text-decoration:none;
+    }
+    .social a:hover { transform: scale(1.2); color: var(--accent); }
+
+    /* Footer */
+    footer { text-align:center; padding:25px; background:#222; color:#fff; font-size:0.9rem; }
+
+    /* Animations */
+    @keyframes fadeIn { to { opacity:1; transform:translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="logo">Starquill Creations</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mode-toggle" id="modeToggle">Dark Mode</div>
+  </nav>
+
+  <!-- Home -->
+  <section id="home">
+    <h1>Welcome to Starquill Creations</h1>
+    <p class="typing"></p>
+    <a href="#portfolio" class="btn">See My Work</a>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Hello! I’m Muskan Gupta, a creative visionary turning ideas into unique works of art and storytelling. Through Starquill Creations, I share my projects, workshops, and passion with the world.</p>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio">
+    <h2>My Work</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <img src="https://i.ibb.co/5KXYWkY/project1.png" alt="Project 1">
+      </div>
+      <div class="portfolio-item">
+        <img src="https://i.ibb.co/TmC4M4r/project2.png" alt="Project 2">
+      </div>
+      <div class="portfolio-item">
+        <img src="https://i.ibb.co/1Xf0XqB/project3.png" alt="Project 3">
+      </div>
+    </div>
+    <!-- Social Icons -->
+    <div class="social">
+      <a href="#" target="_blank">🌐</a>
+      <a href="#" target="_blank">🐦</a>
+      <a href="#" target="_blank">📸</a>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="https://formspree.io/f/yourformid" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Starquill Creations. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
+
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if(window.scrollY > 50) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    });
+
+    const typingEl = document.querySelector('.typing');
+    const phrases = ["Crafting stories that shine worldwide.", "Turning ideas into unique creations.", "Join my creative journey!"];
+    let i = 0, j = 0, currentPhrase = '', isDeleting = false;
+    function type() {
+      if(i >= phrases.length) i = 0;
+      currentPhrase = phrases[i];
+      if(!isDeleting) {
+        typingEl.textContent = currentPhrase.slice(0, j+1);
+        j++;
+        if(j === currentPhrase.length){ isDeleting = true; setTimeout(type, 1500); return; }
+      } else {
+        typingEl.textContent = currentPhrase.slice(0, j-1);
+        j--;
+        if(j === 0){ isDeleting = false; i++; }
+      }
+      setTimeout(type, isDeleting ? 50 : 100);
+    }
+    type();
+
+    const modeToggle = document.getElementById('modeToggle');
+    modeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      modeToggle.textContent = document.body.classList.contains('dark') ? 'Light Mode' : 'Dark Mode';
+    });
+  </script>
+
+</body>
+</html>
